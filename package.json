@@ -1,5 +1,5 @@
 {
-  "name": "google-translate-api",
+  "name": "googletranslate",
   "version": "1.0.0",
   "description": "A Node.JS library to consume Google Translate for free.",
   "main": "src/index.js",
