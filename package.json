@@ -12,6 +12,15 @@
     "type": "git",
     "url": "https://github.com/k3rn31p4nic/google-translate-api.git"
   },
+  "keywords": [
+    "google translate api",
+    "google translate",
+    "google api",
+    "translate api",
+    "google",
+    "translate",
+    "api"
+  ],
   "author": "Sankarsan Kampa (a.k.a. k3rn31p4nic)",
   "license": "GPL-3.0",
   "bugs": {
