@@ -1,0 +1,76 @@
+{
+  env: {
+    es6: true,
+    node: true
+  },
+  extends: "eslint:recommended",
+  parserOptions: {
+    ecmaVersion: 8,
+    sourceType: "module"
+  },
+  rules: {
+    # Possible Errors
+    no-console: "warn",
+    no-template-curly-in-string: "warn",
+    valid-jsdoc: "warn",
+
+    # Best Practices
+    curly: [ "warn", "multi-line" ],
+    default-case: "warn",
+    eqeqeq: [ "warn", "always" ],
+    dot-location: [ "warn", "object" ],
+    no-else-return: "error",
+    no-extra-label: "error",
+    no-floating-decimal: "error",
+    no-lone-blocks: "error",
+    no-multi-str: "error",
+    no-new: "error",
+    no-new-func: "error",
+    no-return-assign: "error",
+    no-useless-concat: "warn",
+    no-useless-escape: "error",
+    no-useless-return: "error",
+    require-await: "error",
+    yoda: [ "error", "never", { "onlyEquality": true } ],
+
+    # NodeJS/CommonJS
+    # handle-callback-err: ["error", "(e|E)rr"]
+    no-new-require: "error",
+    no-sync: "error",
+
+    # Style
+    array-bracket-spacing: [ "warn", "always" ],
+    block-spacing: "warn",
+    brace-style: [ "warn", "stroustrup", { "allowSingleLine": true } ],
+    comma-dangle: [ "warn", "never" ],
+    comma-spacing: "warn",
+    comma-style: "warn",
+    computed-property-spacing: "warn",
+    eol-last: "warn",
+    func-call-spacing: "warn",
+    indent: [ "warn", 2, { SwitchCase: 1, MemberExpression: 1 } ],
+    linebreak-style: [ "error", "unix" ],
+    no-array-constructor: "error",
+    no-multiple-empty-lines: "warn",
+    no-new-object: "error",
+    no-trailing-spaces: "warn",
+    no-unneeded-ternary: "error",
+    object-curly-spacing: ["warn", "always"],
+    quotes: [ "warn", "single" ],
+    require-jsdoc: [ "warn", { require: { FunctionDeclaration: true, MethodDefinition: true, ClassDeclaration: true, ArrowFunctionExpression: true } } ],
+    semi: [ "error", "always" ],
+    space-infix-ops: "warn",
+    spaced-comment: ["error", "always"],
+
+    # ES6
+    arrow-spacing: "error",
+    no-useless-computed-key: "error",
+    no-useless-constructor: "error",
+    no-useless-rename: "error",
+    no-var: "error",
+    prefer-template: "warn",
+    rest-spread-spacing: "error",
+    symbol-description: "error",
+    template-curly-spacing: "error"
+  }
+}
