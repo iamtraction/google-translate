@@ -21,14 +21,19 @@ A [Node.JS](https://nodejs.org) library to consume Google Translate for free.
 
 ## Installation
 ```bash
+# Stable version, from npm repository
 npm install --save @k3rn31p4nic/google-translate-api
+
+# Latest version, from GitHub repository
 ```
 
 ## Usage
 ```js
+// If you've installed from npm, do:
 const translate = require('@k3rn31p4nic/google-translate-api');
-// If you're installing from GitHub, do
-// const translate = require('google-translate-api');
+
+// If you've installed from GitHub, do:
+const translate = require('google-translate-api');
 ```
 
 #### Method: `translate(text, options)`
