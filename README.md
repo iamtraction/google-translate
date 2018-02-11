@@ -7,20 +7,28 @@ A [Node.JS](https://nodejs.org) library to consume Google Translate for free.
 [![license](https://img.shields.io/github/license/k3rn31p4nic/google-translate-api.svg)](LICENSE)
 [![Say Thanks!](https://img.shields.io/badge/Say%20Thanks-!-1EAEDB.svg)](https://saythanks.io/to/k3rn31p4nic)
 
+### Feature Highlights
+* Automatically detect source language
+* Automatic spelling corrections
+* Automatic language correction
+* Fast and reliable
+
 ## Table of Contents
 * [Installation](#installation)
 * [Usage](#usage)
 * [Examples](#examples)
-
+* [Credits, etc](#extras)
 
 ## Installation
 ```bash
-npm install --save k3rn31p4nic/google-translate-api
+npm install --save @k3rn31p4nic/google-translate-api
 ```
 
 ## Usage
 ```js
-const translate = require('google-translate-api');
+const translate = require('@k3rn31p4nic/google-translate-api');
+// If you're installing from GitHub, do
+// const translate = require('google-translate-api');
 ```
 
 #### Method: `translate(text, options)`
@@ -55,8 +63,6 @@ translate(text, options).then(console.log).catch(console.error);
 ## Examples
 #### From automatic language detection to English:
 ```js
-const translate = require('google-translate-api');
-
 translate('Tu es incroyable!', { to: 'en' }).then(res => {
   console.log(res.text); // OUTPUT: You are amazing!
 }).catch(err => {
@@ -66,8 +72,6 @@ translate('Tu es incroyable!', { to: 'en' }).then(res => {
 
 #### From English to French, with a typo:
 ```js
-const translate = require('google-translate-api');
-
 translate('Thnak you', { from: 'en', to: 'fr' }).then(res => {
   console.log(res.text); // OUTPUT: Je vous remercie
   console.log(res.from.autoCorrected); // OUTPUT: true
@@ -80,8 +84,6 @@ translate('Thnak you', { from: 'en', to: 'fr' }).then(res => {
 
 #### Sometimes Google Translate won't auto correct:
 ```js
-const translate = require('google-translate-api');
-
 translate('Thnak you', { from: 'en', to: 'fr' }).then(res => {
   console.log(res.text); // OUTPUT: ''
   console.log(res.from.autoCorrected); // OUTPUT: false
