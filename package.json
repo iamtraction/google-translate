@@ -1,0 +1,26 @@
+{
+  "name": "google-translate-api",
+  "version": "1.0.0",
+  "description": "A Node.JS library to consume Google Translate for free.",
+  "main": "src/index.js",
+  "scripts": {
+    "test:lint": "./node_modules/.bin/eslint .",
+    "test": "npm run test:lint",
+    "start": "node ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/k3rn31p4nic/google-translate-api.git"
+  },
+  "author": "Sankarsan Kampa (a.k.a. k3rn31p4nic)",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/TheBastionBot/Bastion/issues"
+  },
+  "dependencies": {
+    "got": "~8.0.3"
+  },
+  "devDependencies": {
+    "eslint": "~4.17.0"
+  }
+}
