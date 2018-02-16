@@ -1,6 +1,6 @@
 {
   "name": "@k3rn31p4nic/google-translate-api",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "A Node.JS library to consume Google Translate for free.",
   "main": "src/index.js",
   "scripts": {
@@ -27,9 +27,9 @@
     "url": "https://github.com/k3rn31p4nic/google-translate-api/issues"
   },
   "dependencies": {
-    "got": "~8.0.3"
+    "got": "^8.1.0"
   },
   "devDependencies": {
-    "eslint": "~4.17.0"
+    "eslint": "^4.17.0"
   }
 }
