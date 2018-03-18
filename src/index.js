@@ -14,7 +14,7 @@ async function translate(text, options) {
     if (typeof options !== 'object') options = {};
     text = String(text);
 
-    // Check if a lanugage is in supported; if not, return an error object.
+    // Check if a lanugage is in supported; if not, throw an error object.
     let error;
     [ options.from, options.to ].forEach((lang) => {
       if (lang && !languages.isSupported(lang)) {
@@ -23,7 +23,7 @@ async function translate(text, options) {
         error.message = `The language '${lang}' is not supported.`;
       }
     });
-    if (error) return error;
+    if (error) throw error;
 
     // If options object doesn't have 'from' language, set it to 'auto'.
     if (!options.hasOwnProperty('from')) options.from = 'auto';
@@ -144,9 +144,9 @@ async function translate(text, options) {
       error.name = e.name;
       error.statusCode = e.statusCode;
       error.statusMessage = e.statusMessage;
-      return error;
+      throw error;
     }
-    return e;
+    throw e;
   }
 }
 
