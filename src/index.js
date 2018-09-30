@@ -42,7 +42,7 @@ async function translate(text, options) {
     // URL & query string required by Google Translate.
     let url = 'https://translate.google.com/translate_a/single';
     let data = {
-      client: 't',
+      client: 'gtx',
       sl: options.from,
       tl: options.to,
       hl: options.to,
