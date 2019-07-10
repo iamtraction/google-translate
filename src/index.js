@@ -68,12 +68,11 @@ async function translate(text, options) {
         `${url}?${querystring.stringify(data)}`,
         {
           method: 'POST',
-          body: {
+          body: JSON.stringify({
             q: text
-          }
+          })
         }
       ];
-      requestOptions[1] = JSON.stringify(requestOptions[1]);
     }
     else {
       requestOptions = [ url ];
