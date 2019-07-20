@@ -85,7 +85,7 @@ async function translate(text, options) {
 
       requestOptions[1] = {
         agent: tunnel.httpOverHttp({
-          proxy: proxies[0]
+          proxy: proxies[Math.floor(Math.random() * proxies.length)]
         })
       };
     }
