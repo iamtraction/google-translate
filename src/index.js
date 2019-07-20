@@ -2,6 +2,7 @@ const languages = require('./languages');
 const tokenGenerator = require('./tokenGenerator');
 const querystring = require('querystring');
 const got = require('got');
+const tunnel = require('tunnel');
 
 /**
  * @function translate
@@ -78,6 +79,16 @@ async function translate(text, options) {
       requestOptions = [ url ];
     }
 
+    let proxies = [];
+    if (Array.isArray(options.proxies)) {
+      proxies = options.proxies;
+
+      requestOptions[1] = {
+        agent: tunnel.httpOverHttp({
+          proxy: proxies[0]
+        })
+      };
+    }
     // Request translation from Google Translate.
     let response = await got(...requestOptions);
 
