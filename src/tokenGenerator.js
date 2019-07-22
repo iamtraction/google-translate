@@ -8,6 +8,7 @@
 const got = require('got');
 
 /* eslint-disable */
+
 // BEGIN
 function zr(a) {
   let b;
@@ -79,28 +80,15 @@ function updateTKK() {
         let res = await got('https://translate.google.com');
 
         const code = res.body.match(/tkk:'\d+.\d+'/g);
+        // code will extract something like tkk:'1232135.131231321312', we need only value
 
         if (code.length > 0) {
-          const xt = code[0].split(':')[1].replace('\'', '').replace('\'', '');
+          // extracting value tkk:'1232135.131231321312', this will extract only token: 1232135.131231321312
+          const xt = code[0].split(':')[1].replace(/'/g, '');
 
           window.TKK = xt;
           config.set('TKK', xt);
         }
-
-        // if (code) {
-        //   eval(code[0]);
-        //   /* eslint-disable no-undef */
-        //   if (typeof TKK !== 'undefined') {
-        //     window.TKK = TKK;
-        //     config.set('TKK', TKK);
-        //   }
-        //   /* eslint-enable no-undef */
-        // }
-
-        /**
-         * Note: If the regex or the eval fail, there is no need to worry. The
-         * server will accept relatively old seeds.
-         */
 
         resolve();
       }
