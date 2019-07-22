@@ -2,7 +2,7 @@ const languages = require('./languages');
 const tokenGenerator = require('./tokenGenerator');
 const querystring = require('querystring');
 const got = require('got');
-const tunnel = require('tunnel');
+
 
 /**
  * @function translate
@@ -17,7 +17,7 @@ async function translate(text, options) {
 
     // Check if a lanugage is in supported; if not, throw an error object.
     let error;
-    [ options.from, options.to ].forEach((lang) => {
+    [options.from, options.to].forEach((lang) => {
       if (lang && !languages.isSupported(lang)) {
         error = new Error();
         error.code = 400;
@@ -47,7 +47,7 @@ async function translate(text, options) {
       sl: options.from,
       tl: options.to,
       hl: options.to,
-      dt: [ 'at', 'bd', 'ex', 'ld', 'md', 'qca', 'rw', 'rm', 'ss', 't' ],
+      dt: ['at', 'bd', 'ex', 'ld', 'md', 'qca', 'rw', 'rm', 'ss', 't'],
       ie: 'UTF-8',
       oe: 'UTF-8',
       otf: 1,
@@ -76,19 +76,9 @@ async function translate(text, options) {
       ];
     }
     else {
-      requestOptions = [ url ];
+      requestOptions = [url];
     }
 
-    let proxies = [];
-    if (Array.isArray(options.proxies)) {
-      proxies = options.proxies;
-
-      requestOptions[1] = {
-        agent: tunnel.httpOverHttp({
-          proxy: proxies[Math.floor(Math.random() * proxies.length)]
-        })
-      };
-    }
     // Request translation from Google Translate.
     let response = await got(...requestOptions);
 
@@ -147,8 +137,7 @@ async function translate(text, options) {
     }
 
     return result;
-  }
-  catch (e) {
+  } catch (e) {
     if (e.name === 'HTTPError') {
       let error = new Error();
       error.name = e.name;
