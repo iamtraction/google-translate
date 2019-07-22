@@ -57,12 +57,12 @@ translate(text, options).then(console.log).catch(console.error);
 | `text` | `String` | The translated text. |
 | `from` | `Object` | - |
 | `from.language` | `Object` | - |
-| `from.language.didYouMean` | `Booelan` | Whether or not the API suggest a correction in the source language. |
+| `from.language.didYouMean` | `Boolean` | Whether or not the API suggest a correction in the source language. |
 | `from.language.iso` | `String` | The ISO 639-1 code of the language that the API has recognized in the text. |
 | `from.text` | `Object` | - |
-| `from.text.autoCorrected` | `Booelan` | Whether or not the API has auto corrected the original text. |
+| `from.text.autoCorrected` | `Boolean` | Whether or not the API has auto corrected the original text. |
 | `from.text.value` | `String` | The auto corrected text or the text with suggested corrections. Only returned if `from.text.autoCorrected` or `from.text.didYouMean` is `true`. |
-| `from.text.didYouMean` | `Booelan` | Wherether or not the API has suggested corrections to the text |
+| `from.text.didYouMean` | `Boolean` | Wherether or not the API has suggested corrections to the text |
 | `raw` | `String` | The raw response from Google Translate servers. Only returned if `options.raw` is `true` in the request options. |
 
 
