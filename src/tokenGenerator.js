@@ -8,23 +8,20 @@
 const got = require('got');
 
 /* eslint-disable */
-
 // BEGIN
 function zr(a) {
   let b;
-  if (null !== yr) {
-    b = yr;
-  }
+  if (null !== yr) b = yr;
   else {
     b = wr(String.fromCharCode(84));
     let c = wr(String.fromCharCode(75));
-    b = [b(), b()];
+    b = [ b(), b() ];
     b[1] = c();
     b = (yr = window[b.join(c())] || '') || '';
   }
   let d = wr(String.fromCharCode(116));
   let c = wr(String.fromCharCode(107));
-  d = [d(), d()];
+  d = [ d(), d() ];
   d[1] = c();
   c = '&' + d.join('') + '=';
   d = b.split('.');
@@ -44,12 +41,12 @@ function zr(a) {
 }
 
 let yr = null;
-let wr = function (a) {
-  return function () {
+let wr = function(a) {
+  return function() {
     return a;
   };
 };
-let xr = function (a, b) {
+let xr = function(a, b) {
   for (let c = 0; c < b.length - 2; c += 3) {
     let d = b.charAt(c + 2);
     d = d >= 'a' ? d.charCodeAt(0) - 87 : Number(d);
