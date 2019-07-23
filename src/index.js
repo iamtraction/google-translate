@@ -2,7 +2,6 @@ const languages = require('./languages');
 const tokenGenerator = require('./tokenGenerator');
 const querystring = require('querystring');
 const got = require('got');
-const tunnel = require('tunnel');
 
 /**
  * @function translate
@@ -41,7 +40,7 @@ async function translate(text, options) {
     let token = await tokenGenerator.generate(text);
 
     // URL & query string required by Google Translate.
-    let url = 'https://translate.google.com/translate_a/single';
+    let baseUrl = 'https://translate.google.com/translate_a/single';
     let data = {
       client: 'gtx',
       sl: options.from,
@@ -59,19 +58,20 @@ async function translate(text, options) {
     };
 
     // Append query string to the request URL.
-    url = `${url}?${querystring.stringify(data)}`;
+    let url = `${baseUrl}?${querystring.stringify(data)}`;
 
     let requestOptions;
     // If request URL is greater than 2048 characters, use POST method.
     if (url.length > 2048) {
       delete data.q;
       requestOptions = [
-        `${url}?${querystring.stringify(data)}`,
+        `${baseUrl}?${querystring.stringify(data)}`,
         {
           method: 'POST',
-          body: JSON.stringify({
+          form: true,
+          body: {
             q: text
-          })
+          }
         }
       ];
     }
@@ -79,16 +79,6 @@ async function translate(text, options) {
       requestOptions = [ url ];
     }
 
-    let proxies = [];
-    if (Array.isArray(options.proxies)) {
-      proxies = options.proxies;
-
-      requestOptions[1] = {
-        agent: tunnel.httpOverHttp({
-          proxy: proxies[Math.floor(Math.random() * proxies.length)]
-        })
-      };
-    }
     // Request translation from Google Translate.
     let response = await got(...requestOptions);
 
