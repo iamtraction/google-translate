@@ -26,6 +26,9 @@
   "bugs": {
     "url": "https://github.com/k3rn31p4nic/google-translate-api/issues"
   },
+  "engines": {
+    "node": ">=8.0.0"
+  },
   "dependencies": {
     "got": "^9.2.2"
   },
