@@ -78,7 +78,7 @@ translate('Tu es incroyable!', { to: 'en' }).then(res => {
 
 #### From English to French, with a typo:
 ```js
-translate('Thnak you', { from: 'en', to: 'fr' }).then(res => {
+translate('Thank you', { from: 'en', to: 'fr' }).then(res => {
   console.log(res.text); // OUTPUT: Je vous remercie
   console.log(res.from.autoCorrected); // OUTPUT: true
   console.log(res.from.text.value); // OUTPUT: [Thank] you
