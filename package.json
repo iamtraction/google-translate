@@ -23,7 +23,7 @@
     "api"
   ],
   "author": "Sankarsan Kampa (a.k.a. k3rn31p4nic)",
-  "license": "GPL-3.0",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/k3rn31p4nic/google-translate-api/issues"
   },
