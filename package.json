@@ -1,39 +1,33 @@
 {
-  "name": "@k3rn31p4nic/google-translate-api",
-  "version": "1.1.1",
-  "description": "A Node.JS library to consume Google Translate for free.",
-  "main": "src/index.js",
-  "typings": "typings/index.d.ts",
-  "scripts": {
-    "test:lint": "./node_modules/.bin/eslint .",
-    "test": "npm run test:lint",
-    "start": "node ."
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/k3rn31p4nic/google-translate-api.git"
-  },
-  "keywords": [
-    "google translate api",
-    "google translate",
-    "google api",
-    "translate api",
-    "google",
-    "translate",
-    "api"
-  ],
-  "author": "Sankarsan Kampa (a.k.a. k3rn31p4nic)",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/k3rn31p4nic/google-translate-api/issues"
-  },
-  "engines": {
-    "node": ">=8.0.0"
-  },
-  "dependencies": {
-    "got": "^11.1.1"
-  },
-  "devDependencies": {
-    "eslint": "^6.8.0"
-  }
+    "name": "@iamtraction/google-translate",
+    "version": "1.1.2",
+    "description": "A Node.JS library to consume Google Translate API for free.",
+    "main": "src/index.js",
+    "typings": "typings/index.d.ts",
+    "scripts": {
+        "test:lint": "./node_modules/.bin/eslint .",
+        "test": "npm run test:lint",
+        "start": "node ."
+    },
+    "repository": "https://github.com/iamtraction/google-translate",
+    "keywords": [
+        "google translate api",
+        "google translate",
+        "google api",
+        "translate api",
+        "google",
+        "translate",
+        "api"
+    ],
+    "author": "Sankarsan Kampa (iamtraction)",
+    "license": "MIT",
+    "engines": {
+        "node": ">=8.0.0"
+    },
+    "dependencies": {
+        "got": "^11.8.1"
+    },
+    "devDependencies": {
+        "eslint": "^7.18.0"
+    }
 }
