@@ -138,13 +138,6 @@ async function translate(text, options) {
         return result;
     }
     catch (e) {
-        if (e.name === "HTTPError") {
-            let error = new Error();
-            error.name = e.name;
-            error.statusCode = e.statusCode;
-            error.statusMessage = e.statusMessage;
-            throw error;
-        }
         throw e;
     }
 }
