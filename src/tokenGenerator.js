@@ -5,7 +5,7 @@
  * Everything between 'BEGIN' and 'END' was copied from the script above.
  */
 
-const got = require("got");
+const { request } = require("undici");
 
 /* eslint-disable */
 // BEGIN
@@ -66,33 +66,22 @@ const window = {
 
 // eslint-disable-next-line require-jsdoc
 async function updateTKK() {
-    try {
-        let now = Math.floor(Date.now() / 3600000);
+    let now = Math.floor(Date.now() / 3600000);
 
-        if (Number(window.TKK.split(".")[0]) !== now) {
-            let res = await got("https://translate.google.com");
+    if (Number(window.TKK.split(".")[0]) !== now) {
+        const response = await request("https://translate.google.com");
+        const body = await response.body.text();
 
-            // code will extract something like tkk:'1232135.131231321312', we need only value
-            const code = res.body.match(/tkk:'\d+.\d+'/g);
+        // code will extract something like tkk:'1232135.131231321312', we need only value
+        const code = body.match(/tkk:'\d+.\d+'/g);
 
-            if (code.length > 0) {
-                // extracting value tkk:'1232135.131231321312', this will extract only token: 1232135.131231321312
-                const xt = code[0].split(":")[1].replace(/'/g, "");
+        if (code.length > 0) {
+            // extracting value tkk:'1232135.131231321312', this will extract only token: 1232135.131231321312
+            const xt = code[0].split(":")[1].replace(/'/g, "");
 
-                window.TKK = xt;
-                config.set("TKK", xt);
-            }
+            window.TKK = xt;
+            config.set("TKK", xt);
         }
-    }
-    catch (e) {
-        if (e.name === "HTTPError") {
-            let error = new Error();
-            error.name = e.name;
-            error.statusCode = e.statusCode;
-            error.statusMessage = e.statusMessage;
-            throw error;
-        }
-        throw e;
     }
 }
 

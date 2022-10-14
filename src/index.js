@@ -1,5 +1,5 @@
 const querystring = require("querystring");
-const got = require("got");
+const { request } = require("undici");
 
 const languages = require("./languages");
 const tokenGenerator = require("./tokenGenerator");
@@ -79,7 +79,8 @@ async function translate(text, options) {
     }
 
     // Request translation from Google Translate.
-    let response = await got(...requestOptions);
+    let response = await request(...requestOptions);
+    let body = await response.body.json();
 
     let result = {
         text: "",
@@ -99,12 +100,10 @@ async function translate(text, options) {
 
     // If user requested a raw output, add the raw response to the result
     if (options.raw) {
-        result.raw = response.body;
+        result.raw = body;
     }
 
-    // Parse string body to JSON and add it to result object.
-
-    let body = JSON.parse(response.body);
+    // Parse body and add it to the result object.
     body[0].forEach((obj) => {
         if (obj[0]) {
             result.text += obj[0];
