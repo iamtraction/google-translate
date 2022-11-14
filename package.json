@@ -25,9 +25,9 @@
         "node": ">=16.0.0"
     },
     "dependencies": {
-        "undici": "^5.11.0"
+        "undici": "^5.12.0"
     },
     "devDependencies": {
-        "eslint": "^8.25.0"
+        "eslint": "^8.27.0"
     }
 }
