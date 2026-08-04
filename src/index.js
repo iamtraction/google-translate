@@ -1,6 +1,30 @@
-const { request } = require("undici");
+const { request, EnvHttpProxyAgent } = require("undici");
 
 const languages = require("./languages");
+
+let envProxyAgent;
+let envProxyKey;
+
+/**
+ * @function getDispatcher
+ * @param {Object} options The options object for the translator.
+ * @returns {Object|undefined} The dispatcher, or undefined to use the global one.
+ */
+function getDispatcher(options) {
+    if (options.dispatcher) return options.dispatcher;
+
+    let proxies = [ "http_proxy", "HTTP_PROXY", "https_proxy", "HTTPS_PROXY" ].map((name) => process.env[name] || "");
+    if (!proxies.some(Boolean)) return undefined;
+
+    // EnvHttpProxyAgent reads the variables once, so it is rebuilt when they change.
+    let key = proxies.join("\n");
+    if (envProxyKey !== key) {
+        envProxyAgent = new EnvHttpProxyAgent();
+        envProxyKey = key;
+    }
+
+    return envProxyAgent;
+}
 
 /**
  * Serialises the query, repeating a key once per value for array values, as
@@ -71,6 +95,8 @@ async function translate(text, options) {
     // Append query string to the request URL.
     let url = `${baseUrl}?${stringify(data)}`;
 
+    let dispatcher = getDispatcher(options);
+
     let requestOptions;
     // If request URL is greater than 2048 characters, use POST method.
     if (url.length > 2048) {
@@ -83,11 +109,12 @@ async function translate(text, options) {
                 headers: {
                     "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8",
                 },
+                dispatcher,
             }
         ];
     }
     else {
-        requestOptions = [ url ];
+        requestOptions = [ url, { dispatcher } ];
     }
 
     // Request translation from Google Translate.

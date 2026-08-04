@@ -12,6 +12,8 @@ declare namespace translate {
         to?: string;
         /** If `true`, it will return the raw output that was received from Google Translate. */
         raw?: boolean;
+        /** The undici dispatcher to make the request with. */
+        dispatcher?: Dispatcher;
     }
 
     interface TranslateResponse {
@@ -35,6 +37,11 @@ declare namespace translate {
         };
         /** The raw response from Google Translate servers, or `""` unless `options.raw` is `true` in the request options. */
         raw: unknown[] | "";
+    }
+
+    /** An undici dispatcher. Structurally compatible with undici's `Dispatcher`. */
+    interface Dispatcher {
+        dispatch(options: object, handler: object): boolean;
     }
 
     /** The languages Google Translate supports, keyed by code. */

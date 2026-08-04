@@ -46,6 +46,9 @@ translate(text, options).then(console.log).catch(console.error);
 | `options.from` | `String` | Yes | `'auto'` | The language name or code to translate from. If none is given, it will auto detect the source language. |
 | `options.to` | `String` | Yes | `'en'` | The language name or code to translate to. If none is given, it will translate to English. |
 | `options.raw` | `Boolean` | Yes | `false` | If `true`, it will return the raw output that was received from Google Translate. |
+| `options.dispatcher` | `Dispatcher` | Yes | - | The [undici](https://undici.nodejs.org) dispatcher to make the request with. |
+
+Behind a proxy, set `HTTP_PROXY`, `HTTPS_PROXY` and `NO_PROXY`. Pass `options.dispatcher` to take over entirely. Without either, undici's global dispatcher is used.
 
 #### Returns: `Promise<Object>`
 **Response Object:**
