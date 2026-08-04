@@ -1,4 +1,3 @@
-const querystring = require("querystring");
 const { request, EnvHttpProxyAgent } = require("undici");
 
 const languages = require("./languages");
@@ -25,6 +24,23 @@ function getDispatcher(options) {
     }
 
     return envProxyAgent;
+}
+
+/**
+ * Serialises the query, repeating a key once per value for array values, as
+ * Google expects for `dt`
+ * @param {Object} query The query parameters.
+ * @returns {String} The encoded query string.
+ */
+function stringify(query) {
+    let params = new URLSearchParams();
+
+    for (let [ key, value ] of Object.entries(query)) {
+        if (Array.isArray(value)) value.forEach((item) => params.append(key, item));
+        else params.append(key, value);
+    }
+
+    return params.toString();
 }
 
 /**
@@ -77,7 +93,7 @@ async function translate(text, options) {
     };
 
     // Append query string to the request URL.
-    let url = `${baseUrl}?${querystring.stringify(data)}`;
+    let url = `${baseUrl}?${stringify(data)}`;
 
     let dispatcher = getDispatcher(options);
 
@@ -86,7 +102,7 @@ async function translate(text, options) {
     if (url.length > 2048) {
         delete data.q;
         requestOptions = [
-            `${baseUrl}?${querystring.stringify(data)}`,
+            `${baseUrl}?${stringify(data)}`,
             {
                 method: "POST",
                 body: new URLSearchParams({ q: text }).toString(),
