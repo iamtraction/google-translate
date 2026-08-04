@@ -2,7 +2,6 @@ const querystring = require("querystring");
 const { request } = require("undici");
 
 const languages = require("./languages");
-const tokenGenerator = require("./tokenGenerator");
 
 /**
  * @function translate
@@ -18,9 +17,9 @@ async function translate(text, options) {
     let error;
     [ options.from, options.to ].forEach((lang) => {
         if (lang && !languages.isSupported(lang)) {
-            error = new Error();
+            error = new Error(`The language '${lang}' is not supported.`);
+            error.name = "UnsupportedLanguageError";
             error.code = 400;
-            error.message = `The language '${lang}' is not supported.`;
         }
     });
     if (error) throw error;
@@ -35,9 +34,6 @@ async function translate(text, options) {
     // Get ISO 639-1 codes for the languages.
     options.from = languages.getISOCode(options.from);
     options.to = languages.getISOCode(options.to);
-
-    // Generate Google Translate token for the text to be translated.
-    let token = await tokenGenerator.generate(text);
 
     // URL & query string required by Google Translate.
     let baseUrl = "https://translate.google.com/translate_a/single";
@@ -54,7 +50,6 @@ async function translate(text, options) {
         tsel: 0,
         kc: 7,
         q: text,
-        [token.name]: token.value
     };
 
     // Append query string to the request URL.
@@ -81,7 +76,27 @@ async function translate(text, options) {
 
     // Request translation from Google Translate.
     let response = await request(...requestOptions);
-    let body = await response.body.json();
+
+    // Error responses are HTML, not JSON.
+    if (response.statusCode !== 200) {
+        await response.body.dump();
+
+        let responseError = new Error(`Google Translate responded with the status code ${response.statusCode}.`);
+        responseError.name = "TranslateResponseError";
+        responseError.code = response.statusCode;
+        throw responseError;
+    }
+
+    let body;
+    try {
+        body = await response.body.json();
+    }
+    catch (cause) {
+        let parseError = new Error("Google Translate returned a malformed response.", { cause });
+        parseError.name = "TranslateResponseError";
+        parseError.code = 502;
+        throw parseError;
+    }
 
     let result = {
         text: "",

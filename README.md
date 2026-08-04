@@ -65,6 +65,24 @@ translate(text, options).then(console.log).catch(console.error);
 | `raw` | `String` | The raw response from Google Translate servers. Only returned if `options.raw` is `true` in the request options. |
 
 
+## Errors
+Rejections carry a `name` to tell them apart and a `code` with HTTP semantics.
+
+| `name` | `code` | Thrown when |
+| --- | --- | --- |
+| `UnsupportedLanguageError` | `400` | `options.from` or `options.to` is not a supported language. No request is made. |
+| `TranslateResponseError` | The response status | Google Translate answered with a status other than `200`. |
+| `TranslateResponseError` | `502` | Google Translate answered `200` with a body that could not be parsed. The original parse error is on `err.cause`. |
+
+Match on `name` rather than `code`, as an upstream rejection also reports `400`.
+
+```js
+translate('Tu es incroyable!', { to: 'klingon' }).catch(err => {
+  if (err.name === 'UnsupportedLanguageError') console.error(err.message);
+});
+```
+
+
 ## Examples
 #### From automatic language detection to English:
 ```js

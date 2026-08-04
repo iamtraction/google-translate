@@ -8,10 +8,7 @@ module.exports = defineConfig([
         languageOptions: {
             ecmaVersion: 2022,
             sourceType: "commonjs",
-            globals: {
-                ...globals.node,
-                ...globals.browser
-            }
+            globals: globals.node
         },
         rules: {
             indent: [ "error", 4 ],
