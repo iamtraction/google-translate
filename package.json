@@ -1,6 +1,6 @@
 {
     "name": "@iamtraction/google-translate",
-    "version": "2.0.1",
+    "version": "3.0.0",
     "description": "A Node.JS library to consume Google Translate API for free.",
     "type": "commonjs",
     "main": "src/index.js",
