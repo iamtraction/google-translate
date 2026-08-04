@@ -7,7 +7,6 @@
 
 const { request } = require("undici");
 
-/* eslint-disable */
 // BEGIN
 function zr(a) {
     let b;
@@ -26,7 +25,6 @@ function zr(a) {
     c = "&" + d.join("") + "=";
     d = b.split(".");
     b = Number(d[0]) || 0;
-    // eslint-disable-next-line no-var
     for (var e = [], f = 0, g = 0; g < a.length; g++) {
         let l = a.charCodeAt(g);
         128 > l ? e[f++] = l : (2048 > l ? e[f++] = l >> 6 | 192 : ((l & 64512) == 55296 && g + 1 < a.length && (a.charCodeAt(g + 1) & 64512) == 56320 ? (l = 65536 + ((l & 1023) << 10) + (a.charCodeAt(++g) & 1023), e[f++] = l >> 18 | 240, e[f++] = l >> 12 & 63 | 128) : e[f++] = l >> 12 | 224, e[f++] = l >> 6 & 63 | 128), e[f++] = l & 63 | 128);
@@ -56,7 +54,6 @@ let xr = function(a, b) {
     return a;
 };
 // END
-/* eslint-enable */
 
 const config = new Map();
 
@@ -64,7 +61,6 @@ const window = {
     TKK: config.get("TKK") || "0"
 };
 
-// eslint-disable-next-line require-jsdoc
 async function updateTKK() {
     let now = Math.floor(Date.now() / 3600000);
 
@@ -85,7 +81,6 @@ async function updateTKK() {
     }
 }
 
-// eslint-disable-next-line require-jsdoc
 async function generate(text) {
     try {
         await updateTKK();
