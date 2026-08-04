@@ -282,8 +282,8 @@ function getISOCode(language) {
 }
 
 /**
- * Returns true if the desiredLang is supported by Google Translate and false otherwise
- * @param {String} language The ISO 639-1 code or the name of the desired language.
+ * Returns true if the language is supported by Google Translate and false otherwise
+ * @param {string} language The code or the name of the desired language.
  * @returns {boolean} If the language is supported or not.
  */
 function isSupported(language) {

@@ -31,7 +31,7 @@ async function translate(text, options) {
     // If options object has a "raw" property evaluating to true, set it to true.
     options.raw = Boolean(options.raw);
 
-    // Get ISO 639-1 codes for the languages.
+    // Get the codes for the languages.
     options.from = languages.getISOCode(options.from);
     options.to = languages.getISOCode(options.to);
 
