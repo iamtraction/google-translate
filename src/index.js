@@ -24,10 +24,10 @@ async function translate(text, options) {
     });
     if (error) throw error;
 
-    // If options object doesn"t have "from" language, set it to "auto".
-    if (!Object.prototype.hasOwnProperty.call(options, "from")) options.from = "auto";
-    // If options object doesn"t have "to" language, set it to "en".
-    if (!Object.prototype.hasOwnProperty.call(options, "to")) options.to = "en";
+    // If options object doesn't have a "from" language, set it to "auto".
+    if (!options.from) options.from = "auto";
+    // If options object doesn't have a "to" language, set it to "en".
+    if (!options.to) options.to = "en";
     // If options object has a "raw" property evaluating to true, set it to true.
     options.raw = Boolean(options.raw);
 

@@ -33,9 +33,22 @@ declare namespace translate {
                 didYouMean: boolean;
             };
         };
-        /** The raw response from Google Translate servers. Only returned if `options.raw` is `true` in the request options. */
-        raw: string;
+        /** The raw response from Google Translate servers, or `""` unless `options.raw` is `true` in the request options. */
+        raw: unknown[] | "";
     }
+
+    /** The languages Google Translate supports, keyed by code. */
+    type LanguageTable = {
+        readonly [code: string]: string;
+    };
+
+    /** The language table, with its non-enumerable lookup helpers attached. */
+    type Languages = LanguageTable & {
+        /** Returns the code for a language name or code, case insensitively, or null if unsupported. */
+        getISOCode(language: string): string | null;
+        /** Returns whether the given code or display name is supported. */
+        isSupported(language: string): boolean;
+    };
 
     /** The error thrown when `options.from` or `options.to` is not a language Google Translate supports. */
     interface UnsupportedLanguageError extends Error {
@@ -56,6 +69,8 @@ declare namespace translate {
 
     /** Any error `translate` rejects with. Narrow it on `name`. */
     type TranslateError = UnsupportedLanguageError | TranslateResponseError;
+
+    const languages: Languages;
 }
 
 export = translate;

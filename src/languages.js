@@ -261,16 +261,16 @@ const languages = {
 };
 
 /**
- * Returns the code of the desiredLang – if it is supported by Google Translate
+ * Returns the code of the language – if it is supported by Google Translate
  *
  * Matching is case insensitive, but the code is returned with the casing of
  * the table, as Google reads the script subtag (e.g. crh-Latn) as significant.
  * @param {string} language The name or the code of the desired language
- * @returns {string|boolean} The code of the language, null if the language is
- * not supported, or false if no language was given
+ * @returns {string|null} The code of the language, or null if it is not
+ * supported
  */
 function getISOCode(language) {
-    if (!language) return false;
+    if (!language) return null;
     let query = String(language).toLowerCase();
 
     let codes = Object.keys(languages).filter((key) => typeof languages[key] === "string");
@@ -291,5 +291,6 @@ function isSupported(language) {
 }
 
 module.exports = languages;
-module.exports.isSupported = isSupported;
-module.exports.getISOCode = getISOCode;
+
+Object.defineProperty(module.exports, "isSupported", { value: isSupported });
+Object.defineProperty(module.exports, "getISOCode", { value: getISOCode });

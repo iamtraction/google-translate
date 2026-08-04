@@ -62,7 +62,19 @@ translate(text, options).then(console.log).catch(console.error);
 | `from.text.autoCorrected` | `Boolean` | Whether or not the API has auto corrected the original text. |
 | `from.text.value` | `String` | The auto corrected text or the text with suggested corrections. Only returned if `from.text.autoCorrected` or `from.text.didYouMean` is `true`. |
 | `from.text.didYouMean` | `Boolean` | Wherether or not the API has suggested corrections to the text |
-| `raw` | `String` | The raw response from Google Translate servers. Only returned if `options.raw` is `true` in the request options. |
+| `raw` | `Array` | The raw response from Google Translate servers, or `""` unless `options.raw` is `true` in the request options. |
+
+
+## Languages
+`translate.languages` is the table of supported languages, keyed by code, with two helpers attached.
+
+```js
+translate.languages['pa-Arab'];              // OUTPUT: Punjabi (Shahmukhi)
+translate.languages.getISOCode('Spanish');   // OUTPUT: es
+translate.languages.isSupported('klingon');  // OUTPUT: false
+```
+
+`getISOCode` accepts a code or a display name, case insensitively, and returns the code in its canonical casing or `null` if it isn't supported. The helpers are non-enumerable, so iterating the table yields only languages.
 
 
 ## Errors
