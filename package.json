@@ -22,10 +22,10 @@
     "author": "Sankarsan Kampa (iamtraction)",
     "license": "MIT",
     "engines": {
-        "node": ">=16.0.0"
+        "node": ">=22.19.0"
     },
     "dependencies": {
-        "undici": "^5.12.0"
+        "undici": "^8.10.0"
     },
     "devDependencies": {
         "@eslint/js": "^10.0.1",
