@@ -2,7 +2,6 @@ const querystring = require("querystring");
 const { request } = require("undici");
 
 const languages = require("./languages");
-const tokenGenerator = require("./tokenGenerator");
 
 /**
  * @function translate
@@ -36,9 +35,6 @@ async function translate(text, options) {
     options.from = languages.getISOCode(options.from);
     options.to = languages.getISOCode(options.to);
 
-    // Generate Google Translate token for the text to be translated.
-    let token = await tokenGenerator.generate(text);
-
     // URL & query string required by Google Translate.
     let baseUrl = "https://translate.google.com/translate_a/single";
     let data = {
@@ -54,7 +50,6 @@ async function translate(text, options) {
         tsel: 0,
         kc: 7,
         q: text,
-        [token.name]: token.value
     };
 
     // Append query string to the request URL.
