@@ -18,8 +18,7 @@
     ],
     "scripts": {
         "test:lint": "eslint .",
-        "test": "npm run test:lint",
-        "start": "node ."
+        "test": "npm run test:lint"
     },
     "repository": {
         "type": "git",
