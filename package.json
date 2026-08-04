@@ -21,7 +21,14 @@
         "test": "npm run test:lint",
         "start": "node ."
     },
-    "repository": "https://github.com/iamtraction/google-translate",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/iamtraction/google-translate.git"
+    },
+    "bugs": {
+        "url": "https://github.com/iamtraction/google-translate/issues"
+    },
+    "homepage": "https://github.com/iamtraction/google-translate#readme",
     "keywords": [
         "google translate api",
         "google translate",
