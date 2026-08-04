@@ -69,11 +69,11 @@ translate(text, options).then(console.log).catch(console.error);
 
 ```js
 translate.languages['pa-Arab'];              // OUTPUT: Punjabi (Shahmukhi)
-translate.languages.getISOCode('Spanish');   // OUTPUT: es
+translate.languages.getCode('Spanish');   // OUTPUT: es
 translate.languages.isSupported('klingon');  // OUTPUT: false
 ```
 
-`getISOCode` accepts a code or a display name, case insensitively, and returns the code in its canonical casing or `null` if it isn't supported. The helpers are non-enumerable, so iterating the table yields only languages.
+`getCode` accepts a code or a display name, case insensitively, and returns the code in its canonical casing or `null` if it isn't supported. The helpers are non-enumerable, so iterating the table yields only languages.
 
 
 ## Errors

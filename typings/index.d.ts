@@ -45,7 +45,7 @@ declare namespace translate {
     /** The language table, with its non-enumerable lookup helpers attached. */
     type Languages = LanguageTable & {
         /** Returns the code for a language name or code, case insensitively, or null if unsupported. */
-        getISOCode(language: string): string | null;
+        getCode(language: string): string | null;
         /** Returns whether the given code or display name is supported. */
         isSupported(language: string): boolean;
     };

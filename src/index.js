@@ -32,8 +32,8 @@ async function translate(text, options) {
     options.raw = Boolean(options.raw);
 
     // Get the codes for the languages.
-    options.from = languages.getISOCode(options.from);
-    options.to = languages.getISOCode(options.to);
+    options.from = languages.getCode(options.from);
+    options.to = languages.getCode(options.to);
 
     // URL & query string required by Google Translate.
     let baseUrl = "https://translate.google.com/translate_a/single";
