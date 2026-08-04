@@ -18,9 +18,9 @@ async function translate(text, options) {
     let error;
     [ options.from, options.to ].forEach((lang) => {
         if (lang && !languages.isSupported(lang)) {
-            error = new Error();
+            error = new Error(`The language '${lang}' is not supported.`);
+            error.name = "UnsupportedLanguageError";
             error.code = 400;
-            error.message = `The language '${lang}' is not supported.`;
         }
     });
     if (error) throw error;
@@ -81,7 +81,27 @@ async function translate(text, options) {
 
     // Request translation from Google Translate.
     let response = await request(...requestOptions);
-    let body = await response.body.json();
+
+    // Error responses are HTML, not JSON.
+    if (response.statusCode !== 200) {
+        await response.body.dump();
+
+        let responseError = new Error(`Google Translate responded with the status code ${response.statusCode}.`);
+        responseError.name = "TranslateResponseError";
+        responseError.code = response.statusCode;
+        throw responseError;
+    }
+
+    let body;
+    try {
+        body = await response.body.json();
+    }
+    catch (cause) {
+        let parseError = new Error("Google Translate returned a malformed response.", { cause });
+        parseError.name = "TranslateResponseError";
+        parseError.code = 502;
+        throw parseError;
+    }
 
     let result = {
         text: "",
