@@ -116,24 +116,24 @@ const languages = {
 };
 
 /**
- * Returns the ISO 639-1 code of the desiredLang – if it is supported by
- * Google Translate
+ * Returns the code of the desiredLang – if it is supported by Google Translate
+ *
+ * Matching is case insensitive, but the code is returned with the casing of
+ * the table, as Google reads the script subtag (e.g. pa-Arab) as significant.
  * @param {string} language The name or the code of the desired language
- * @returns {string|boolean} The ISO 639-1 code of the language or null if the
- * language is not supported
+ * @returns {string|boolean} The code of the language, null if the language is
+ * not supported, or false if no language was given
  */
 function getISOCode(language) {
     if (!language) return false;
-    language = language.toLowerCase();
-    if (language in languages) return language;
+    let query = String(language).toLowerCase();
 
-    let keys = Object.keys(languages).filter((key) => {
-        if (typeof languages[key] !== "string") return false;
+    let codes = Object.keys(languages).filter((key) => typeof languages[key] === "string");
 
-        return languages[key].toLowerCase() === language;
-    });
+    let byCode = codes.find((key) => key.toLowerCase() === query);
+    if (byCode) return byCode;
 
-    return keys[0] || null;
+    return codes.find((key) => languages[key].toLowerCase() === query) || null;
 }
 
 /**
