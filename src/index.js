@@ -1,7 +1,28 @@
 const querystring = require("querystring");
-const { request } = require("undici");
+const { request, EnvHttpProxyAgent } = require("undici");
 
 const languages = require("./languages");
+
+let envProxyAgent;
+
+/**
+ * Returns the dispatcher to make the request with
+ *
+ * A proxy agent is only built when the environment asks for one, so that
+ * setGlobalDispatcher still applies otherwise.
+ * @param {Object} options The options object for the translator.
+ * @returns {Object|undefined} The dispatcher, or undefined to use the global one.
+ */
+function getDispatcher(options) {
+    if (options.dispatcher) return options.dispatcher;
+
+    let proxied = [ "http_proxy", "HTTP_PROXY", "https_proxy", "HTTPS_PROXY" ].some((name) => process.env[name]);
+    if (!proxied) return undefined;
+
+    if (!envProxyAgent) envProxyAgent = new EnvHttpProxyAgent();
+
+    return envProxyAgent;
+}
 
 /**
  * @function translate
@@ -55,6 +76,8 @@ async function translate(text, options) {
     // Append query string to the request URL.
     let url = `${baseUrl}?${querystring.stringify(data)}`;
 
+    let dispatcher = getDispatcher(options);
+
     let requestOptions;
     // If request URL is greater than 2048 characters, use POST method.
     if (url.length > 2048) {
@@ -67,11 +90,12 @@ async function translate(text, options) {
                 headers: {
                     "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8",
                 },
+                ...dispatcher && { dispatcher },
             }
         ];
     }
     else {
-        requestOptions = [ url ];
+        requestOptions = dispatcher ? [ url, { dispatcher } ] : [ url ];
     }
 
     // Request translation from Google Translate.

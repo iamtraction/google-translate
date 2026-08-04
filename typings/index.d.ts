@@ -12,6 +12,8 @@ declare namespace translate {
         to?: string;
         /** If `true`, it will return the raw output that was received from Google Translate. */
         raw?: boolean;
+        /** The undici dispatcher to make the request with. Defaults to a proxy agent when the environment sets a proxy, and to undici's global dispatcher otherwise. */
+        dispatcher?: unknown;
     }
 
     interface TranslateResponse {
