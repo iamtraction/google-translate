@@ -15,19 +15,23 @@ jobs:
       - uses: actions/setup-node@v5
         with:
           node-version: 24
-      - run: npm install
+          cache: npm
+      - run: npm ci
       - run: npm test
 
   publish-npm:
     name: Publish to npm
     needs: test
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
     steps:
       - uses: actions/checkout@v5
       - uses: actions/setup-node@v5
         with:
           node-version: 24
           registry-url: https://registry.npmjs.org/
-      - run: npm publish
+      - run: npm publish --provenance
         env:
           NODE_AUTH_TOKEN: ${{secrets.npm_token}}

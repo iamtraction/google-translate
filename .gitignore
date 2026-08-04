@@ -111,5 +111,4 @@ jspm_packages
 .yarn-integrity
 
 # Lock files
-package-lock.json
 yarn.lock
