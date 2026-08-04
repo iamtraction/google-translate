@@ -291,5 +291,6 @@ function isSupported(language) {
 }
 
 module.exports = languages;
-module.exports.isSupported = isSupported;
-module.exports.getISOCode = getISOCode;
+
+Object.defineProperty(module.exports, "isSupported", { value: isSupported });
+Object.defineProperty(module.exports, "getISOCode", { value: getISOCode });
