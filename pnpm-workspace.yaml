@@ -1,0 +1,7 @@
+minimumReleaseAge: 1440 # 1 day
+blockExoticSubdeps: true
+strictDepBuilds: true
+allowBuilds:
+  # Explicitly list packages allowed to run postinstall scripts.
+  # WARNING: comment out strictDepBuilds above if this becomes hard to maintain.
+  # e.g. esbuild: true
