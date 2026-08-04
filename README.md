@@ -48,7 +48,7 @@ translate(text, options).then(console.log).catch(console.error);
 | `options.raw` | `Boolean` | Yes | `false` | If `true`, it will return the raw output that was received from Google Translate. |
 | `options.dispatcher` | `Dispatcher` | Yes | - | The [undici](https://undici.nodejs.org) dispatcher to make the request with. |
 
-Behind a proxy, set `HTTP_PROXY`, `HTTPS_PROXY` and `NO_PROXY` and the request follows them. Pass `options.dispatcher` to take over entirely, for a custom proxy, retries or mocking; without either, undici's global dispatcher is used, so `setGlobalDispatcher` keeps working.
+Behind a proxy, set `HTTP_PROXY`, `HTTPS_PROXY` and `NO_PROXY`. Pass `options.dispatcher` to take over entirely. Without either, undici's global dispatcher is used.
 
 #### Returns: `Promise<Object>`
 **Response Object:**
