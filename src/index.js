@@ -31,9 +31,9 @@ async function translate(text, options) {
     // If options object has a "raw" property evaluating to true, set it to true.
     options.raw = Boolean(options.raw);
 
-    // Get ISO 639-1 codes for the languages.
-    options.from = languages.getISOCode(options.from);
-    options.to = languages.getISOCode(options.to);
+    // Get the codes for the languages.
+    options.from = languages.getCode(options.from);
+    options.to = languages.getCode(options.to);
 
     // URL & query string required by Google Translate.
     let baseUrl = "https://translate.google.com/translate_a/single";

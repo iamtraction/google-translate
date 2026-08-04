@@ -6,9 +6,9 @@ declare function translate(text: string, options?: translate.TranslateOption): P
 
 declare namespace translate {
     interface TranslateOption {
-        /** The language name/ISO 639-1 code to translate from. If none is given, it will auto detect the source language. */
+        /** The language name or code to translate from. If none is given, it will auto detect the source language. */
         from?: string;
-        /** The language name/ISO 639-1 code to translate to. If none is given, it will translate to English. */
+        /** The language name or code to translate to. If none is given, it will translate to English. */
         to?: string;
         /** If `true`, it will return the raw output that was received from Google Translate. */
         raw?: boolean;
@@ -21,13 +21,13 @@ declare namespace translate {
             language: {
                 /** Whether or not the API suggest a correction in the source language. */
                 didYouMean: boolean;
-                /** The ISO 639-1 code of the language that the API has recognized in the text. */
+                /** The code of the language that the API has recognized in the text. */
                 iso: string;
             };
             text: {
                 /** Whether or not the API has auto corrected the original text. */
                 autoCorrected: boolean;
-                /** The auto corrected text or the text with suggested corrections. Only returned if `from.text.autoCorrected` or `from.text.didYouMean` is `true`. */
+                /** The auto corrected text or the text with suggested corrections, or `""` unless `from.text.autoCorrected` or `from.text.didYouMean` is `true`. */
                 value: string;
                 /** Wherether or not the API has suggested corrections to the text. */
                 didYouMean: boolean;
@@ -45,7 +45,7 @@ declare namespace translate {
     /** The language table, with its non-enumerable lookup helpers attached. */
     type Languages = LanguageTable & {
         /** Returns the code for a language name or code, case insensitively, or null if unsupported. */
-        getISOCode(language: string): string | null;
+        getCode(language: string): string | null;
         /** Returns whether the given code or display name is supported. */
         isSupported(language: string): boolean;
     };

@@ -269,7 +269,7 @@ const languages = {
  * @returns {string|null} The code of the language, or null if it is not
  * supported
  */
-function getISOCode(language) {
+function getCode(language) {
     if (!language) return null;
     let query = String(language).toLowerCase();
 
@@ -282,15 +282,15 @@ function getISOCode(language) {
 }
 
 /**
- * Returns true if the desiredLang is supported by Google Translate and false otherwise
- * @param {String} language The ISO 639-1 code or the name of the desired language.
+ * Returns true if the language is supported by Google Translate and false otherwise
+ * @param {string} language The code or the name of the desired language.
  * @returns {boolean} If the language is supported or not.
  */
 function isSupported(language) {
-    return Boolean(getISOCode(language));
+    return Boolean(getCode(language));
 }
 
 module.exports = languages;
 
 Object.defineProperty(module.exports, "isSupported", { value: isSupported });
-Object.defineProperty(module.exports, "getISOCode", { value: getISOCode });
+Object.defineProperty(module.exports, "getCode", { value: getCode });
