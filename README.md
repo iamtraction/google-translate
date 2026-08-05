@@ -17,6 +17,7 @@ A [Node.JS](https://nodejs.org) library to consume Google Translate for free.
 * [Languages](#languages)
 * [Errors](#errors)
 * [Examples](#examples)
+* [Development](#development)
 * [Credits, etc](#extras)
 
 ## Installation
@@ -130,6 +131,19 @@ translate('I spea Dutch!', { from: 'en', to: 'nl' }).then(res => {
   console.error(err);
 });
 ```
+
+## Development
+```bash
+npm run lint          # ESLint
+npm test              # the test suite
+npm run test:coverage # the test suite with a coverage report for src/
+```
+
+Lint is separate from tests and is not run by `npm test` — CI runs it as its own step, and a habit of running `npm test` alone will skip it.
+
+Most of the suite runs offline: `languages`, `request`, `parse`, and `errors` mock the transport through the public `dispatcher` option, so they assert what this library does — the request it builds, how it parses the response, how it validates and reports errors — without a network call. Only `test/smoke.test.js` reaches the real `translate.google.com`, so a red run there may be Google rate limiting rather than a regression. It checks only that a live response still parses into the expected shape; whether a translation is *correct* is Google's concern, not this library's, so no test asserts translated content.
+
+To run just the offline suites: `node --test test/languages.test.js test/request.test.js test/parse.test.js test/errors.test.js`.
 
 ## Extras
 If you liked this project, please give it a ⭐ in [**GitHub**](https://github.com/iamtraction/google-translate).

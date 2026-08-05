@@ -17,8 +17,9 @@
         "typings"
     ],
     "scripts": {
-        "test:lint": "eslint .",
-        "test": "npm run test:lint"
+        "lint": "eslint .",
+        "test": "node --test",
+        "test:coverage": "node --test --experimental-test-coverage --test-coverage-include=\"src/**\""
     },
     "repository": {
         "type": "git",

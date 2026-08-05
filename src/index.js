@@ -50,7 +50,7 @@ function stringify(query) {
  * @returns {Object} The result containing the translation.
  */
 async function translate(text, options) {
-    if (typeof options !== "object") options = {};
+    if (typeof options !== "object" || options === null) options = {};
     text = String(text);
 
     // Check if a lanugage is in supported; if not, throw an error object.
