@@ -1,4 +1,4 @@
-# This workflow will run tests using node and then publish a package to npm when a release is created
+# This workflow publishes the package to npm when a release is created.
 
 name: Node.js Package
 
@@ -7,21 +7,8 @@ on:
     types: [ created ]
 
 jobs:
-  test:
-    name: Test
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v7
-      - uses: actions/setup-node@v7
-        with:
-          node-version: 24
-          cache: npm
-      - run: npm ci
-      - run: npm test
-
   publish-npm:
     name: Publish to npm
-    needs: test
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -31,7 +18,10 @@ jobs:
       - uses: actions/setup-node@v7
         with:
           node-version: 24
+          cache: npm
           registry-url: https://registry.npmjs.org/
+      - run: npm ci
+      - run: npm run lint
       - run: npm publish --provenance
         env:
           NODE_AUTH_TOKEN: ${{secrets.npm_token}}
