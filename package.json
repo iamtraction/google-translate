@@ -38,7 +38,7 @@
         "translate",
         "api"
     ],
-    "author": "Sankarsan Kampa (iamtraction)",
+    "author": "TRACTION (iamtraction)",
     "license": "MIT",
     "engines": {
         "node": ">=22.19.0"
